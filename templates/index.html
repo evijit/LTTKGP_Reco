@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LTTKGP Recommendation Evaluation</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <style>
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 60%;
+        }
+        
+        #sortable li {
+            margin: 0 3px 3px 3px;
+            padding: 0.4em;
+            padding-left: 1.5em;
+            font-size: 1.4em;
+            height: 18px;
+        }
+        
+        #sortable li span {
+            position: absolute;
+            margin-left: -1.3em;
+        }
+    </style>
+    <style>
+        /* Split the screen in half */
+        
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        
+        .split {
+            height: 100%;
+            width: 50%;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+        /* Control the left side */
+        
+        .left {
+            left: 0;
+            zoom: 0.8;
+            -moz-transform: scale(0.8);
+        }
+        /* Control the right side */
+        
+        .right {
+            right: 0;
+            position: fixed;
+        }
+        /* If you want the content centered horizontally and vertically */
+        
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        /* Style the image inside the centered container, if needed */
+        
+        .centered img {
+            width: 150px;
+            border-radius: 50%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+        });
+
+        // function getorder() {
+        //     var idsInOrder = $("sortable2").sortable("toArray");
+        //     alert(idsInOrder);
+    </script>
+    <script>
+        function getorder() {
+            // var data = $("#sortable").sortable('serialize');
+            // var idsInOrder = $("sortable").sortable("toArray");
+            // var listElements = $("sortable").children();
+            // var listValues = [];
+
+            // listElement.forEach(function(element) {
+            //     listValues.push(element.innerHTML);
+            // });
+
+            // alert(listValues);
+            alert($("#sortable").sortable("toArray").toSource());
+
+            // $.ajax({
+            //     result: listValues,
+            //     traditional: true,
+            //     type: 'POST',
+            //     url: '/save'
+            // });
+        }
+    </script>
+</head>
+
+<body>
+
+    <form method="POST">
+        <div class="split right">
+            <div class="centered">
+                <h2>LTTKGP - Music Recommendation Evaluation</h2>
+
+                <h5>Please order this list from most liked to least liked. Submit when done.</h5>
+
+                <select id="userid_selected" name="userid_selected">
+                {% for itemname, itemid in toPass %}
+                    {% if Uid == itemid %}
+                    <option value={{itemid}} selected>{{ itemname }}</option>
+                    {% else%}
+                    <option value={{itemid}}>{{ itemname }}</option>
+                    {% endif %}
+                {% endfor %}
+                
+                <!-- <option value="saab">User2</option>
+                <option value="opel">User3</option>
+                <option value="audi">User4</option> -->
+        </select>
+                <br><br>
+                <input type="submit" name="submit_button" value="Get Preference">
+                <!-- <input type="submit" name="submit_button" value="Update Preference" onclick="getorder()"> -->
+                <input type="submit" name="submit_button" value="Submit" onclick="getorder()">
+            </div>
+        </div>
+
+        <div class="split left">
+            <!-- <div class="centered"> -->
+            <ul id="sortable" style={{ display_mode }}>
+                {% for song in reco_list %}
+                <li class="ui-state-default" id={{song}}><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{song.title()}}</li>
+                {% endfor %}
+                <!-- <li class="ui-state-default" id='i1'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+            <li class="ui-state-default" id='i2'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+            <li class="ui-state-default" id='i3'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+            <li class="ui-state-default" id='i4'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+            <li class="ui-state-default" id='i5'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+            <li class="ui-state-default" id='i6'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+            <li class="ui-state-default" id='i7'><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li> -->
+            </ul>
+            <!-- </div> -->
+        </div>
+
+
+
+    </form>
+
+
+
+</body>
+
+</html>
