@@ -79,7 +79,6 @@
             $("#sortable").sortable();
             $("#sortable").disableSelection();
         });
-
         // function getorder() {
         //     var idsInOrder = $("sortable2").sortable("toArray");
         //     alert(idsInOrder);
@@ -96,14 +95,17 @@
             // });
 
             // alert(listValues);
-            alert($("#sortable").sortable("toArray").toSource());
+            console.log($("#sortable").sortable("toArray").toSource());
 
-            // $.ajax({
-            //     result: listValues,
-            //     traditional: true,
-            //     type: 'POST',
-            //     url: '/save'
-            // });
+            $.ajax({
+                data: {result: listValues},
+                traditional: true,
+                type: 'POST',
+                url: '/save',
+                success: function() {
+                    console.log("successfully posted")
+                }
+            });
         }
     </script>
 </head>
