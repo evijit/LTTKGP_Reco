@@ -9,11 +9,14 @@ import json
 import os
 import numpy as np
 from math import sqrt
+from pymongo import MongoClient
 from getReco import get_reco, find_community
+
 
 app = Flask(__name__)
 sess = Session()
 
+mc = MongoClient(env['MONGODB_URI'])
 
 def get_user_list():
 	d = json.load(open("username2id.json","r"))
