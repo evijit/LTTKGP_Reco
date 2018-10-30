@@ -54,9 +54,11 @@ def save():
 			if priority_list:
 				preference_list_coll.insert_one({ 'list' : priority_list})
 				print("added")
-			except Exception as e:
-				print("Error :- ")
-				print(e)
+			else:
+				print("priority_list is empty")
+		except Exception as e:
+			print("Error :- ")
+			print(e)
 
 		print(priority_list)
 		return 'OK'
