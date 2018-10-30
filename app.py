@@ -48,6 +48,16 @@ def main():
 def save():
 		print("save")
 		priority_list = request.values.getlist('result')
+		preference_list_coll = mc.get_default_database().preference_list
+
+		try:
+			if priority_list:
+				preference_list_coll.insert_one({ 'list' : priority_list})
+				print("added")
+			except Exception as e:
+				print("Error :- ")
+				print(e)
+
 		print(priority_list)
 		return 'OK'
 
