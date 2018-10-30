@@ -9,11 +9,14 @@ import json
 import os
 import numpy as np
 from math import sqrt
+from pymongo import MongoClient
 from getReco import get_reco, find_community
+
 
 app = Flask(__name__)
 sess = Session()
 
+mc = MongoClient(os.environ['MONGODB_URI'])
 
 def get_user_list():
 	d = json.load(open("username2id.json","r"))
@@ -45,6 +48,19 @@ def main():
 def save():
 		print("save")
 		priority_list = request.values.getlist('result')
+		preference_list_coll = mc.get_default_database().preference_list
+
+		try:
+			if priority_list:
+				print("adding...")
+				preference_list_coll.insert_one({ 'list' : priority_list})
+				print("added")
+			else:
+				print("priority_list is empty")
+		except Exception as e:
+			print("Error :- ")
+			print(e)
+
 		print(priority_list)
 		return 'OK'
 
