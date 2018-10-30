@@ -52,7 +52,8 @@ def save():
 
 		try:
 			if priority_list:
-				preference_list_coll.insert_one({ 'list' : priority_list})
+				print("adding...")
+				preference_list_coll.insert_one({ 'list' : "priority_list"})
 				print("added")
 			else:
 				print("priority_list is empty")
