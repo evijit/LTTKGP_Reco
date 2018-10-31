@@ -97,6 +97,10 @@
             // alert(listValues);
             console.log($("#sortable").sortable("toArray").toSource());
 
+            var listValues = $("#sortable .ui-state-default").map(function() {        
+					        return this.innerText;        
+					    }).get();
+
             $.ajax({
                 data: {result: listValues},
                 traditional: true,
