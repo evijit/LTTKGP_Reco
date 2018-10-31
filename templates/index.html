@@ -102,8 +102,10 @@
 					        return this.innerText;        
 					    }).get();
 
+            var userName = $("#userid_selected")[0][$("#userid_selected")[0].options.selectedIndex].innerText;
+
             $.ajax({
-                data: {result: listValues},
+                data: {result: listValues, username: userName },
                 traditional: true,
                 type: 'POST',
                 url: '/save',
