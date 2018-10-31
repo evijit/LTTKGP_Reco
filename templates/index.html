@@ -84,7 +84,8 @@
         //     alert(idsInOrder);
     </script>
     <script>
-        function getorder() {
+        function getorder(event) {
+        	event.preventDefault();
             // var data = $("#sortable").sortable('serialize');
             // var idsInOrder = $("sortable").sortable("toArray");
             // var listElements = $("sortable").children();
@@ -103,13 +104,15 @@
 
             var userName = $("#userid_selected")[0][$("#userid_selected")[0].options.selectedIndex].innerText;
 
+
             $.ajax({
                 data: {result: listValues, username: userName },
                 traditional: true,
                 type: 'POST',
                 url: '/save',
                 success: function() {
-                    console.log("successfully posted")
+                    console.log("successfully posted");
+                    alert("successfully posted");
                 }
             });
         }
@@ -141,7 +144,7 @@
                 <br><br>
                 <input type="submit" name="submit_button" value="Get Preference">
                 <!-- <input type="submit" name="submit_button" value="Update Preference" onclick="getorder()"> -->
-                <input type="submit" name="submit_button" value="Submit" onclick="getorder()">
+                <input type="submit" name="submit_button" value="Submit" onclick="getorder(event);">
             </div>
         </div>
 
