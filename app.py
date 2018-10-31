@@ -3,13 +3,16 @@ import os
 
 
 from flask import Flask
-from flask import Flask, render_template, url_for, request, session, redirect
+from flask import Flask, render_template, url_for, request, session, redirect, jsonify
 from flask_session import Session
 import json
 import os
 import numpy as np
 from math import sqrt
 from pymongo import MongoClient
+from bson.json_util import dumps
+from bson.json_util import loads as bloads
+
 from getReco import get_reco, find_community
 
 
@@ -71,6 +74,15 @@ def save():
 
     # return "Thank You"
 
+@app.route('/get_json')
+def get_json():
+    preference_list_coll = mc.get_default_database().preference_list
+    cursor = preference_list_coll.find({})
+    jsonList = []
+    for document in cursor:
+        jsonList.append(dumps(document))
+    
+    return jsonify({ 'json' : jsonList })
 
 @app.route('/', methods=['POST'])
 def get_pref_clicked():
