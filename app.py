@@ -11,7 +11,6 @@ import numpy as np
 from math import sqrt
 from pymongo import MongoClient
 from bson.json_util import dumps
-from bson.json_util import loads as bloads
 
 from getReco import get_reco, find_community
 
