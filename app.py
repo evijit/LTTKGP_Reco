@@ -1,9 +1,8 @@
 import sys
 import os
 
-
-from flask import Flask
-from flask import Flask, render_template, url_for, request, session, redirect, jsonify
+from flask import Flask, render_template, url_for, request, session
+from flask import redirect, jsonify
 from flask_session import Session
 import json
 import os
@@ -73,6 +72,7 @@ def save():
 
     # return "Thank You"
 
+
 @app.route('/get_json')
 def get_json():
     preference_list_coll = mc.get_default_database().preference_list
@@ -80,8 +80,9 @@ def get_json():
     jsonList = []
     for document in cursor:
         jsonList.append(dumps(document))
-    
-    return jsonify({ 'json' : jsonList })
+
+    return jsonify({'json': jsonList})
+
 
 @app.route('/', methods=['POST'])
 def get_pref_clicked():
