@@ -52,12 +52,13 @@ def main():
 def save():
     print("save")
     priority_list = request.values.getlist('result')
+    username = request.values.getlist('username')
     preference_list_coll = mc.get_default_database().preference_list
 
     try:
         if priority_list:
             print("adding...")
-            preference_list_coll.insert_one({'list': priority_list})
+            preference_list_coll.insert_one({username: priority_list})
             print("added")
         else:
             print("priority_list is empty")
