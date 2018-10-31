@@ -52,7 +52,7 @@ def main():
 def save():
     print("save")
     priority_list = request.values.getlist('result')
-    username = request.values.getlist('username')
+    username = request.values.getlist('username')[0]
     preference_list_coll = mc.get_default_database().preference_list
 
     try:
